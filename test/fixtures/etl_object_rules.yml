@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  load_field: MyString
+  extract_field: MyString
+  active: false
+
+two:
+  load_field: MyString
+  extract_field: MyString
+  active: false

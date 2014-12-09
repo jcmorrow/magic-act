@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="small-12 columns">
+		<div class="small-12 medium-6 columns panel">
+			<p>
+			  <strong>Extract Object:</strong>
+			  <%= @etl_object_rule.extract_object %>
+			</p>
+			<p>
+			  <strong>Load Object:</strong>
+			  <%= @etl_object_rule.load_object %>
+			</p>
+			<p>
+			  <strong>Active:</strong>
+			  <%= @etl_object_rule.active %>
+			</p>
+			<p>
+			  <strong>Is Primary:</strong>
+			  <%= @etl_object_rule.is_primary %>
+			</p>
+			<%= link_to 'Edit', edit_etl_object_rule_path(@etl_object_rule) %> |
+			<%= link_to 'Back', etl_object_rules_path %>
+		</div>
+		<div class="small-12 medium-6 columns panel">
+			<h3>Field Rules</h3>
+			<table>
+				<% @etl_object_rule.etl_field_rules.each do |field_rule| %>
+					<tr><td><%=field_rule.extract_field %></td><td><%=field_rule.load_field %></td></tr>
+				<% end %>
+			</table>
+			<%= link_to 'New ETL Field Rule', new_etl_object_rule_etl_field_rule_path(@etl_object_rule.id) %>
+		</div>
+	</div>
+</div>

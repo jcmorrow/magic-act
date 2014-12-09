@@ -1,0 +1,148 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require foundation
+ *= require_self
+ */
+div.pan
+{
+	background-color: #FFF;
+	border-radius: 6px;
+	padding-top: 0px;
+	box-shadow: 0px 0px 2px #aaa;
+	border-bottom: 1px solid #999;
+}
+div.columns table
+{
+	width: 100%;
+}
+div.container
+{
+	/*padding:0px 20px;*/
+	max-width: 1000px;
+	margin: auto;
+}
+div.application.container
+{
+	margin-top: 10px;
+}
+div.dark
+{
+	background: linear-gradient(#233143,#3e4859);
+	color: #7a828d;
+	border-radius: 6px;
+	box-shadow: inset 0px 1px 4px 1px rgba(29, 41, 56, 1);
+	border:1px solid #233143; 
+}
+div.dark h1, div.dark h2, div.dark h3, div.dark label
+{
+	color: #fff;
+}
+p.query, span.query
+{
+	border:1px solid black;
+	padding:5px;
+	background: #444;
+	color: #ccc;
+	border-radius: 4px;
+}
+.button.inline
+{
+	padding:5px;
+	margin: 0px 5px;
+	background-image: linear-gradient(rgb(56, 149, 203), rgb(1, 94, 148));
+	border: 1px solid #5780B8;
+}
+h1>.button.inline.right
+{
+	top:15px;
+}
+h3>.button.inline.right
+{
+	top:7px;
+}
+
+#etl_job_etl_object_rule_ids
+{
+	height: 100px;
+}
+
+.top-bar
+{
+	margin-top: 10px;
+}
+body, .top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section ul li, .contain-to-grid
+{
+	background-color: #e8ebef;
+	color: #333;
+}
+.top-bar-section li:not(.has-form) a:not(.button):hover
+{
+	background-color: #e8ebef;
+	color: #333;
+}
+.top-bar-section li:not(.has-form) a:not(.button).active
+{
+	background-image: linear-gradient(rgba(168, 176, 188, 0.4), rgba(168, 176, 188, 0.14902));
+	border-radius: 30px;
+	border: 1px solid #ccc;
+}
+.top-bar .name h1 a
+{
+	color: #333;
+	font-size: 2.5rem;
+	font-family: 'Montserrat';
+	font-weight: 700;
+}
+body, h1, h2, h3, h4, h5, h6
+{
+	font-family: 'Lato';
+}
+body
+{
+	font-weight: 300;
+}
+span.stat
+{
+	font-size: 2rem;
+	line-height: 2rem;
+	font-family: 'Montserrat';
+	display: block;
+	color: #fff;
+}
+span.err
+{
+	color:rgb(173, 27, 27);
+}
+div.row.dark.summary
+{
+	padding-bottom:20px;
+	padding-top: 10px;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+}
+#footer
+{
+	border-top: 1px solid #ccc;
+	margin-top: 10px;
+	color: #666;
+	text-align: right;
+}
+#footer a:hover
+{
+	border-bottom: 1px dashed;
+}
+tr.job-group
+{
+	background-color: #D7D7D7 !important;
+}

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  extract_field: MyString
+  transformation: MyText
+  load_field: MyString
+  active: false
+
+two:
+  extract_field: MyString
+  transformation: MyText
+  load_field: MyString
+  active: false

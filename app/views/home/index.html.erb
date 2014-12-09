@@ -1,0 +1,91 @@
+
+<div class="row dark summary text-center">
+	<span>Today's Summary</span>
+	<hr style="border-top:1px solid #7a828d; margin: .5rem;"/>
+	<div class="small-12 columns">
+		<div class="small-4 columns text-center">
+			<span class="stat"><%= SubJobGroup.etlTotalToday %></span>
+			<span>Records Transferred</span>
+		</div>
+		<div class="small-4 columns text-center">
+			<span class="stat"><%= SubJobGroup.newTotalToday %></span>
+			<span>New Records</span>
+		</div>
+		<div class="small-4 columns text-center">
+			<span class="err stat"><%= SubJobGroup.errorTotalToday %></span>
+			<span>Errors</span>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 medium-6 columns pan" style="border-top-left-radius:0px;border-top-right-radius:0px;">
+		<div>
+			<h3>Jobs <%= link_to "View Jobs", :etl_jobs, class: "radius button inline right" %></h3>
+			<table>
+		      <thead>
+		        <tr>
+		          <th>Id</th>
+		          <th>Date/Time</th>
+		          <%
+=begin %>
+          <th>Extract Results</th>
+          <th>Transform Results</th>
+          <th>Successfully loaded?</th>
+          <th>Errors</th>
+          <th>Processing Time</th>
+          <%
+=end %>
+		          <th colspan="3"></th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <% @etl_jobs.each do |etl_job| %>
+		          <tr>
+		            <td><%= etl_job.id %></td>
+		            <td><%= etl_job.created_at.in_time_zone('America/Los_Angeles').strftime('%m/%d/%Y %l:%M%p') %></td>
+		            <%
+=begin %>
+            <td><%= etl_job.extract_count %>(<%= link_to('Download', secure_get_path(etl_job.id, 'extract'), {:target => '_blank'}) %>)</td>
+            <td><%= etl_job.transform_count %>(<%= link_to('Download', secure_get_path(etl_job.id, 'transform'), {:target => '_blank'}) %>)</td>
+            <td><%= etl_job.load_count %>(<%= etl_job.new_sf_users %> new)(<%= link_to('Download', secure_get_path(etl_job.id, 'load'), {:target => '_blank'}) %>)</td>
+            <td><%= etl_job.errors_count %></td>
+            <td><%= etl_job.duration.round(2) %> seconds</td>
+            <td><%= link_to "View Details", etl_job_path(etl_job.id) %></td>            
+            <%
+=end %>
+		            <td><%= link_to 'Show', etl_job %></td>
+		            <td><%= link_to 'Edit', edit_etl_job_path(etl_job) %></td>
+		          </tr>
+		        <% end %>
+		      </tbody>
+		    </table>
+		</div>
+	</div>
+	<div class="small-12 medium-6 columns pan" style="border-top-left-radius:0px;border-top-right-radius:0px;">
+		<div class="">
+			<h3>Object Rules <%= link_to "View Rules", :etl_object_rules, class: "radius button inline right" %></h3>
+			<table>
+			  <thead>
+			    <tr>
+			      <th>Extract Object</th>
+			      <th>Load Object</th>
+			      <th>Active</th>
+			      <th colspan="3"></th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @etl_object_rules.each do |etl_object_rule| %>
+			      <tr>
+			        <td><%= etl_object_rule.extract_object %></td>
+			        <td><%= etl_object_rule.load_object %></td>
+			        <td><%= etl_object_rule.active %></td>
+			        <td><%= link_to 'Show', etl_object_rule %></td>
+			        <td><%= link_to 'Edit', edit_etl_object_rule_path(etl_object_rule) %></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>

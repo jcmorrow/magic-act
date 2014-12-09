@@ -1,0 +1,64 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h1>ETL Job<%= link_to 'Edit', edit_etl_job_path(@etl_job), class: "button inline radius right" %></h1>
+		<hr />
+		<div class="row pan">
+			<div class="row">
+				<div class="small-12 columns">
+					<h5>Query</h5>
+					 <p class="query"><%= @etl_job.query %></p><%= link_to "See Query Results", '/etl-job/'+@etl_job.id.to_s+'/count', remote: true, class: "button inline radius right" %>
+				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="small-12 columns">
+					<h5>Etl Object Rules</h5>
+					<table>
+						<tr><th>Extract Object</th><th>Load Object</th></tr>
+						<% @etl_object_rules.each do |rule| %>
+							<tr><td><%= rule.extract_object %></td><td><%= rule.load_object %></td></tr>
+						<% end %>
+					</table>
+					<hr />
+				</div>
+			</div>
+			<% @etl_sub_job_groups.each do |job| %>
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="dark" style="padding:20px;margin:10px;">
+						<h3><%= job.created_at.in_time_zone('America/Los_Angeles').strftime('%m/%d/%Y %l:%M%p') %><button class="button inline show radius right" data-job-group="<%= job.id %>" style="top:0px;">Show</button></h3>
+						<table cellspacing="0" style="display:none;" data-job-group="<%= job.id %>">
+							<tr>
+								<th>Run at</th>
+								<th>Extract Stage</th>
+								<th>Transform Stage</th>
+								<th>Load Stage</th>
+								<th>Errors count</th>
+							</tr>
+								<% job.etl_sub_jobs.each do |sub_job| %>
+									<tr>
+										<td><%= sub_job.created_at.in_time_zone('America/Los_Angeles').strftime('%m/%d/%Y %l:%M%p') %></td>
+										<td><%= link_to("#{sub_job.extract_count} objects", secure_get_path(sub_job.id, 'extract'), {:target => '_blank'}) %></td>
+										<td><%= link_to("Transform Results", secure_get_path(sub_job.id, 'transform'), {:target => '_blank'}) %></td>
+										<td><%= link_to("#{sub_job.load_count} objects (#{sub_job.new_load_objects} new)", secure_get_path(sub_job.id, 'load'), {:target => '_blank'}) %></td>
+										<td><%= sub_job.errors_count %></td>
+									</tr>
+								<% end %>
+						</table>
+					</div>
+				</div>
+			</div>
+			<% end %>
+			<script>
+				$('button.show').click(function(){
+					$('table[data-job-group=' + $(this).data('job-group') + ']').show()
+				});
+			</script>
+			<div class="row">
+				<div class="small-12 columns">
+					<%= link_to "Run Job", '/etl-job/'+@etl_job.id.to_s+'/run', method: :post, class: "button radius right inline" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

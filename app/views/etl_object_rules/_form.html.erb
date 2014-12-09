@@ -1,0 +1,32 @@
+<%= form_for(@etl_object_rule) do |f| %>
+  <% if @etl_object_rule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@etl_object_rule.errors.count, "error") %> prohibited this etl_object_rule from being saved:</h2>
+
+      <ul>
+      <% @etl_object_rule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :extract_object %><br>
+    <%= f.text_field :extract_object %>
+  </div>
+  <div class="field">
+    <%= f.label :load_object %><br>
+    <%= f.text_field :load_object %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :is_primary %><br>
+    <%= f.check_box :is_primary %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
