@@ -61,7 +61,8 @@ p.query, span.query
 	padding:5px;
 	margin: 0px 5px;
 	background-image: linear-gradient(rgb(56, 149, 203), rgb(1, 94, 148));
-	border: 1px solid #5780B8;
+	border: 1px solid #3F5E88;
+	text-shadow: 1px 1px #17162A;
 }
 h1>.button.inline.right
 {
