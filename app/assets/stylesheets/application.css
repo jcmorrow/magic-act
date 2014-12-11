@@ -82,21 +82,55 @@ h3>.button.inline.right
 {
 	margin-top: 10px;
 }
-body, .top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section ul li, .contain-to-grid
+body, 
+.top-bar, 
+.contain-to-grid
 {
 	background-color: #e8ebef;
 	color: #333;
+}
+.top-bar-section li:not(.has-form) a:not(.button),
+.top-bar-section li.active:not(.has-form) a:not(.button),
+.top-bar-section li.active:not(.has-form) a:not(.button):hover,
+.top-bar-section ul li:hover:not(.has-form) > a
+{
+	color: #333;
+	line-height: 2.5rem;
+	background: rgba(237, 237, 237, 1);
+	background: -moz-linear-gradient(top, rgba(237, 237, 237, 1) 0%, rgba(207,223,223,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(237, 237, 237, 1)), color-stop(100%, rgba(207,223,223,1)));
+	background: -webkit-linear-gradient(top, rgba(237, 237, 237, 1) 0%, rgba(207,223,223,1) 100%);
+	background: -o-linear-gradient(top, rgba(237, 237, 237, 1) 0%, rgba(207,223,223,1) 100%);
+	background: -ms-linear-gradient(top, rgba(237, 237, 237, 1) 0%, rgba(207,223,223,1) 100%);
+	background: linear-gradient(to bottom, rgba(237, 237, 237, 1) 0%, rgba(207,223,223,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#cfdfdf', GradientType=0 );
+}
+.top-bar-section li.active:not(.has-form) a:not(.button), .top-bar-section li.active:not(.has-form) a:not(.button):hover
+{
+	box-shadow: inset 0px 1px 1px 0px #ccc;
+	background: rgba(207,223,223,1);
+	/*
+	background: rgba(207,223,223,1);
+	background: -moz-linear-gradient(top, rgba(207,223,223,1) 0%, rgba(237,237,237,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(207,223,223,1)), color-stop(100%, rgba(237,237,237,1)));
+	background: -webkit-linear-gradient(top, rgba(207,223,223,1) 0%, rgba(237,237,237,1) 100%);
+	background: -o-linear-gradient(top, rgba(207,223,223,1) 0%, rgba(237,237,237,1) 100%);
+	background: -ms-linear-gradient(top, rgba(207,223,223,1) 0%, rgba(237,237,237,1) 100%);
+	background: linear-gradient(to bottom, rgba(207,223,223,1) 0%, rgba(237,237,237,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfdfdf', endColorstr='#ededed', GradientType=0 );
+	*/
 }
 .top-bar-section li:not(.has-form) a:not(.button):hover
 {
-	background-color: #e8ebef;
 	color: #333;
-}
-.top-bar-section li:not(.has-form) a:not(.button).active
-{
-	background-image: linear-gradient(rgba(168, 176, 188, 0.4), rgba(168, 176, 188, 0.14902));
-	border-radius: 30px;
-	border: 1px solid #ccc;
+	background: rgba(250, 250, 250, 1);
+	background: -moz-linear-gradient(top, rgba(250, 250, 250, 1) 0%, rgba(207,223,223,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(250, 250, 250, 1)), color-stop(100%, rgba(207,223,223,1)));
+	background: -webkit-linear-gradient(top, rgba(250, 250, 250, 1) 0%, rgba(207,223,223,1) 100%);
+	background: -o-linear-gradient(top, rgba(250, 250, 250, 1) 0%, rgba(207,223,223,1) 100%);
+	background: -ms-linear-gradient(top, rgba(250, 250, 250, 1) 0%, rgba(207,223,223,1) 100%);
+	background: linear-gradient(to bottom, rgba(250, 250, 250, 1) 0%, rgba(207,223,223,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#cfdfdf', GradientType=0 );	
 }
 .top-bar .name h1 a
 {
@@ -104,6 +138,33 @@ body, .top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-sect
 	font-size: 2.5rem;
 	font-family: 'Montserrat';
 	font-weight: 700;
+}
+.top-bar-section ul
+{
+	margin-top: 5px;
+	display: table;
+	border-collapse:collapse;
+	border-radius:.25em;
+	box-shadow:#ccc 0px 0px 0px 1px;
+}
+.top-bar-section ul li
+{
+	display: table-cell;
+	float:none;
+	border-left:#ccc 1px solid;
+    border-right:#ccc 1px solid;
+}
+.top-bar-section ul li:first-child, .top-bar-section ul li:first-child>a
+{
+	border-left:0;
+	border-top-left-radius:.25em;
+	border-bottom-left-radius: .25em;
+}
+.top-bar-section ul li:last-child, .top-bar-section ul li:last-child>a
+{
+	border-right:0;
+	border-top-right-radius: .25em;
+	border-bottom-right-radius: .25em;
 }
 body, h1, h2, h3, h4, h5, h6
 {
@@ -143,7 +204,20 @@ div.row.dark.summary
 {
 	border-bottom: 1px dashed;
 }
+table
+{
+	border: 0px;
+}
 tr.job-group
 {
 	background-color: #D7D7D7 !important;
+}
+table thead
+{
+	background-color: #fff;
+	border: 0px;
+}
+table tr.even, table tr.alt, table tr:nth-of-type(even)
+{
+	background-color: #fff;
 }

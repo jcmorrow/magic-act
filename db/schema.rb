@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211195310) do
+ActiveRecord::Schema.define(version: 20141211213019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20141211195310) do
     t.integer  "new_load_objects"
     t.integer  "errors_count"
     t.integer  "job_schedule_id"
+    t.string   "name"
   end
 
   create_table "etl_object_rules", force: true do |t|
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 20141211195310) do
     t.datetime "updated_at"
     t.boolean  "is_primary"
     t.text     "custom_from_clause"
+    t.string   "name"
   end
 
   create_table "etl_sub_jobs", force: true do |t|
@@ -126,6 +128,7 @@ ActiveRecord::Schema.define(version: 20141211195310) do
     t.time     "run_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "sub_job_groups", force: true do |t|
