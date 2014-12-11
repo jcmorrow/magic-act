@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  get '/admins' => 'admins#index'
+  mount RailsAdmin::Engine => '/admin/', as: 'rails_admin'
   resources :etl_jobs
   get '/etl-job/:id/count' => 'etl_jobs#queryCount'
   post '/etl-job/:id/run' => 'etl_jobs#run'

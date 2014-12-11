@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admin = Admin.new
+admin.approved = true
 admin.email = ENV['devise_admin_username']
 admin.password = ENV['devise_admin_password']
 admin.password_confirmation = ENV['devise_admin_password']
