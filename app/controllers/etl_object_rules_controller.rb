@@ -12,7 +12,7 @@ class EtlObjectRulesController < ApplicationController
     @etl_object_rules = EtlObjectRule.all
     @object_details = []
     @etl_object_rules.each do |rule|
-      #@object_details.push({:extract_object_name => rule.extract_object.gsub('core_', ''), :extract_object => actionkit.get("/#{rule.extract_object.gsub('core_', '')}/schema"), :load_object_name => rule.load_object, :load_object =>  salesforce.describe(rule.load_object)})
+      @object_details.push({:extract_object_name => rule.extract_object.gsub('core_', ''), :extract_object => actionkit.get("/#{rule.extract_object.gsub('core_', '')}/schema"), :load_object_name => rule.load_object, :load_object =>  salesforce.describe(rule.load_object)})
     end
   end
 
