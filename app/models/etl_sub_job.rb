@@ -22,7 +22,7 @@ class EtlSubJob < ActiveRecord::Base
 	def run
 		require 'actionkitapi'
 		actionKit = ActionKitApi.new
-		salesforce = SalesforceBulk::Api.new(ENV['sfUsername'], ENV['sfPassword'])
+		salesforce = SalesforceBulk::Api.new(ENV['SALESFORCE_USERNAME'], ENV['SALESFORCE_PASSWORD'] + ENV['SALESFORCE_SECURITY_TOKEN'])
 		queryResult = runQuery
 		self.extract_count = queryResult.count
 		primary_fields = []
