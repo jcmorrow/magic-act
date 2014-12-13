@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="small-6 columns text-center">
+		<div class="pan">
+			<h4>ActionKit Objects</h4>
+			<% @ak_objects.each do |object| %>
+				<% if @extract_objects.include?('core_'<<object[0].downcase) %><li class="button radius block"><%= object[0] %></li><% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="small-6 columns text-center">
+		<div class="pan">
+			<h4>SalesForce Objects</h4>
+			<ul style="list-style-type:none;">
+			<% @sf_objects.each do |object| %>
+				<% if @load_objects.include?(object[:full_name].downcase) %><li class="button radius block"><%= object[:full_name] %></li><% end %>
+			<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

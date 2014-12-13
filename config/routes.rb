@@ -8,14 +8,11 @@ Rails.application.routes.draw do
   get '/download/:sub_job_id/:file_type', to: 'downloads#secureGet', as: 'secure_get'
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
+  get '/etl_object_rules/explore' => 'etl_object_rules#explore'
 
   root 'home#index'
   resources :etl_object_rules do
     resources :etl_field_rules
   end
 
-
-
-  #THROWING IN SOME OTHER STUFF, HOPING THIS CAN ALL BE ONE APPLICATION
-  post '/paypal/webhook/', to: 'paypal_webhooks#webhook'
 end

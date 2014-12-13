@@ -7,12 +7,12 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
-gem 'databasedotcom-rails'
 gem 'foundation-rails'
 gem 'httparty'
 gem 'devise'
 gem 'rails_12factor', group: :production
 #gem 'whenever'
+gem 'restforce'
 gem 'salesforce_bulk'
 gem "paperclip", "~> 4.2"
 gem "delayed_job_recurring"

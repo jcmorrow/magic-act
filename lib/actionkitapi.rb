@@ -7,11 +7,7 @@ class ActionKitApi
 		    	:basic_auth => {:username => ENV['akUsername'], :password => ENV['akPassword'] },
 		    	:headers => { "Content-Type" => "application/json"},
 			}
-<<<<<<< HEAD
 		@base_url = 'https://' + ENV['actionKitUrl'] + '/rest/v1'
-=======
-		@base_url = 'https://roboticdocs.actionkit.com/rest/v1'
->>>>>>> 6cffda6abe90acd3a8f9913f528be5fceda815ad
 	end
 	def get(url, options = Hash.new)
 		com_opt = @options.merge(options)
@@ -27,54 +23,22 @@ class ActionKitApi
 		result = JSON.parse(HTTParty.put(@base_url + url, @options).body)
 		return result
 	end
-<<<<<<< HEAD
 	def post(url, body, options = nil)
 		options = @options
 		options.store('body', body)
 		result = HTTParty.post(@base_url + url, @options)
-=======
-=begin
-	def post(url, body, options = Hash.new)
-		options.store(:body, body.to_json)
-		com_opt = @options.merge(options)
-		puts com_opt
-		return HTTParty.post(@base_url + url, com_opt)
-	end
-=end
-=begin
-	def query(sql, refresh = false)
-	  	if(refresh)
-	  		return post('/report/run/sql/?format=json', {:query => sql, :refresh => "true"})
-	  	else
-	  		return post('/report/run/sql/?format=json', {:query => sql})
-	  	end
-	end
-=end
-	def post(url, body, options = nil)
-		options = @options
-		options.store('body', body)
-		result = HTTParty.post(url, @options)
->>>>>>> 6cffda6abe90acd3a8f9913f528be5fceda815ad
 		return result
 	end
 	def query(sql)
 	  	post_options = @options
 	  	post_options[:body] = {:query => sql}.to_json
-<<<<<<< HEAD
 	  	return post('/report/run/sql/', post_options)
-=======
-	  	return post('https://action.storyofstuff.org/rest/v1/report/run/sql/', post_options)
->>>>>>> 6cffda6abe90acd3a8f9913f528be5fceda815ad
 	end
 	def report(slug, params)
 		post_options = @options
 		params.store(:format, 'json')
 		post_options[:body] = params.to_json
-<<<<<<< HEAD
 		return post('/report/run/' + slug + '?format=json', post_options)
-=======
-		return post('https://action.storyofstuff.org/rest/v1/report/run/' + slug + '?format=json', post_options)
->>>>>>> 6cffda6abe90acd3a8f9913f528be5fceda815ad
 	end
 	def findUsersWhere(where, limit)
 		select = "select distinct core_user.id as user_id, core_user.email as Email__c, core_user.first_name as FirstName__c, core_user.last_name as LastName__c, concat_ws( ', ', if( length( core_user.address1 ), core_user.address1, null ), if( length( core_user.address2 ), core_user.address2, null ) ) as streetAddress__c, core_user.city as City__c, 				    if( core_user.zip, concat_ws( '-', core_user.zip, if( length( core_user.plus4 ), core_user.plus4, null ) ), core_user.postal ) as Zip_Postal__c, core_user.country as Country__c, core_user.subscription_status as Is_Subscribed__c, ( select coalesce( group_concat( phone order by core_phone.id desc separator ', ' ), '' ) from core_phone where core_phone.user_id = core_user.id ) as Phone__c from core_user "

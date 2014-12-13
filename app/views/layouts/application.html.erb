@@ -23,6 +23,13 @@
 		  <section class="top-bar-section">
 		    <!-- Left Nav Section -->
 		    <ul class="left">
+				<li class="has-dropdown">
+					<a href="#">Right Button Dropdown</a>
+					<ul class="dropdown">
+						<li><a href="#">First link in dropdown</a></li>
+						<li class=""><a href="#">Active link in dropdown</a></li>
+					</ul>
+				</li>
 		    </ul>
 		    <ul class="right">
 		    	<li class="<%=  "active" if controller_name == 'home'%>"><%= link_to "Dashboard", root_url %></li>

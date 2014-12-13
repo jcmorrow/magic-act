@@ -2,10 +2,22 @@ class EtlObjectRulesController < ApplicationController
   before_action :set_etl_object_rule, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
 
+  require 'actionkitapi'
+
   # GET /etl_object_rules
   # GET /etl_object_rules.json
   def index
-    @etl_object_rules = EtlObjectRule.all
+    salesforce = Restforce.new
+      render plain: salesforce.describe('Akid__c')
+    #actionkit = ActionKitApi.new
+    #metaforce = Metaforce::Metadata::Client.new :username => ENV['SALESFORCE_USERNAME'], :password => ENV['SALESFORCE_PASSWORD'], :security_token => ENV['SALESFORCE_SECURITY_TOKEN']
+    #manifest = Metaforce::Manifest.new(:custom_object => ['Account'])
+    #@pre = metaforce.retrieve_unpackaged(manifest).class
+    #@etl_object_rules = EtlObjectRule.all
+    #@object_details = []
+    #@etl_object_rules.each do |rule|
+    #  @object_details.push({extract_object => actionkit.get("/#{rule.extract_object}/schema"), load_object =>  metaforce.describe(:type => )})
+    #end
   end
 
   # GET /etl_object_rules/1
@@ -61,6 +73,13 @@ class EtlObjectRulesController < ApplicationController
       format.html { redirect_to etl_object_rules_url, notice: 'Etl object rule was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  def explore
+    actionkit = ActionKitApi.new
+    metaforce = Metaforce::Metadata::Client.new :username => ENV['SALESFORCE_USERNAME'], :password => ENV['SALESFORCE_PASSWORD'], :security_token => ENV['SALESFORCE_SECURITY_TOKEN']
+    metaforce.describe[:metadata_objects]
+    render plain: metaforce.list(:type => 'CustomObject')
+
   end
 
   private
