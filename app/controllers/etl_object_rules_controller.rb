@@ -8,16 +8,12 @@ class EtlObjectRulesController < ApplicationController
   # GET /etl_object_rules.json
   def index
     salesforce = Restforce.new
-      render plain: salesforce.describe('Akid__c')
-    #actionkit = ActionKitApi.new
-    #metaforce = Metaforce::Metadata::Client.new :username => ENV['SALESFORCE_USERNAME'], :password => ENV['SALESFORCE_PASSWORD'], :security_token => ENV['SALESFORCE_SECURITY_TOKEN']
-    #manifest = Metaforce::Manifest.new(:custom_object => ['Account'])
-    #@pre = metaforce.retrieve_unpackaged(manifest).class
-    #@etl_object_rules = EtlObjectRule.all
-    #@object_details = []
-    #@etl_object_rules.each do |rule|
-    #  @object_details.push({extract_object => actionkit.get("/#{rule.extract_object}/schema"), load_object =>  metaforce.describe(:type => )})
-    #end
+    actionkit = ActionKitApi.new
+    @etl_object_rules = EtlObjectRule.all
+    @object_details = []
+    @etl_object_rules.each do |rule|
+      @object_details.push({:extract_object_name => rule.extract_object.gsub('core_', ''), :extract_object => actionkit.get("/#{rule.extract_object.gsub('core_', '')}/schema"), :load_object_name => rule.load_object, :load_object =>  salesforce.describe(rule.load_object)})
+    end
   end
 
   # GET /etl_object_rules/1

@@ -1,8 +1,24 @@
 <div class="row">
   <div class="small-12 columns">
-    <div class="pan">
-      <p><%= @pre %></p>
-    </div>
+    <% @object_details.each do |object| %>
+      <div class="small-6 columns pan">
+        <h3><%= object[:extract_object_name] %> - <%= object[:load_object_name] %></h3>
+        <div class="small-6 columns">
+          <ul>
+            <% object[:extract_object]["fields"].each do |field| %>
+              <li><%= field[0] %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="small-6 columns">
+          <ul>
+            <% object[:load_object]["fields"].each do |field| %>
+              <li><%= field["name"] %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="small-12 columns dark">
     <h1>Object Rules <%= link_to 'New Etl object rule', new_etl_object_rule_path, class: 'right button inline radius' %></h1>
