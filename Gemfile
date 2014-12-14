@@ -23,3 +23,5 @@ gem 'delayed_job_web'
 gem 'metaforce'
 gem 'highline' #required by metaforce
 gem 'paypal-sdk-rest'
+gem 'twitter-typeahead-rails'
+gem 'gon'

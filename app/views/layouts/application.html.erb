@@ -8,6 +8,7 @@
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag "vendor/modernizr" %>
   <%= csrf_meta_tags %>
+  <%= include_gon %>
 </head>
 <body>
 	<div class="contain-to-grid">
@@ -22,7 +23,7 @@
 
 		  <section class="top-bar-section">
 		    <!-- Left Nav Section -->
-		    <ul class="left">
+		    <!--<ul class="left">
 				<li class="has-dropdown">
 					<a href="#">Right Button Dropdown</a>
 					<ul class="dropdown">
@@ -30,13 +31,19 @@
 						<li class=""><a href="#">Active link in dropdown</a></li>
 					</ul>
 				</li>
-		    </ul>
+		    </ul>-->
 		    <ul class="right">
 		    	<li class="<%=  "active" if controller_name == 'home'%>"><%= link_to "Dashboard", root_url %></li>
-		    	<li class="<%=  "active" if controller_name == 'rails_admin'%>"><%= link_to "Admin", rails_admin.dashboard_url %></li>
-				<li class="<%=  "active" if controller_name == 'etl_jobs'%>"><%= link_to "Run Jobs", etl_jobs_url %></li>
-				<li><%= link_to "Monitor Jobs", delayed_job_url %></li>
-				<li class="<%=  "active" if controller_name == 'etl_object_rules'%>"><%= link_to "Objects and Transformations", etl_object_rules_url %></li>
+
+				
+				<li class="has-dropdown">
+					<a href="#">ETL Jobs</a>
+					<ul class="dropdown">
+						<li class="<%=  "active" if controller_name == 'etl_jobs'%>"><%= link_to "Run Jobs", etl_jobs_url %></li>
+						<li class="<%=  "active" if controller_name == 'etl_object_rules'%>"><%= link_to "Object Rules", etl_object_rules_url %></li>
+						<li><%= link_to "Delayed Job", delayed_job_url %></li>
+					</ul>
+				</li>
 		    </ul>
 		  </section>
 		</nav>

@@ -11,7 +11,7 @@
 			<span>New Records</span>
 		</div>
 		<div class="small-4 columns text-center">
-			<span class="err stat"><%= SubJobGroup.errorTotalToday %></span>
+			<span class="<%="err" if(SubJobGroup.errorTotalToday>0) %> stat"><%= SubJobGroup.errorTotalToday %></span>
 			<span>Errors</span>
 		</div>
 	</div>

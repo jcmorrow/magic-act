@@ -98,6 +98,11 @@ GEM
     foundation-rails (5.4.5.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    gon (5.2.3)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     gyoku (1.2.2)
       builder (>= 2.1.2)
     haml (4.0.6)
@@ -185,6 +190,7 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     remotipart (1.2.1)
+    request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     restforce (1.5.0)
@@ -236,6 +242,10 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-typeahead-rails (0.10.5)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -259,6 +269,7 @@ DEPENDENCIES
   delayed_job_web
   devise
   foundation-rails
+  gon
   highline
   httparty
   jbuilder (~> 2.0)
@@ -274,4 +285,5 @@ DEPENDENCIES
   salesforce_bulk
   sdoc (~> 0.4.0)
   spring
+  twitter-typeahead-rails
   uglifier (>= 1.3.0)

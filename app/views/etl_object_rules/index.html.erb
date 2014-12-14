@@ -1,52 +1,40 @@
 <div class="row">
   <div class="small-12 columns">
-    <% @object_details.each do |object| %>
-      <div class="small-6 columns pan">
-        <h3><%= object[:extract_object_name] %> - <%= object[:load_object_name] %></h3>
-        <div class="small-6 columns">
-          <ul>
-            <% object[:extract_object]["fields"].each do |field| %>
-              <li><%= field[0] %></li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="small-6 columns">
-          <ul>
-            <% object[:load_object]["fields"].each do |field| %>
-              <li><%= field["name"] %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="small-12 columns dark">
-    <h1>Object Rules <%= link_to 'New Etl object rule', new_etl_object_rule_path, class: 'right button inline radius' %></h1>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Extract Object</th>
-          <th>Load Object</th>
-          <th>Active</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @etl_object_rules.each do |etl_object_rule| %>
+    <div class="pan">
+      <h3 class="text-center">Object Rules</h3>
+      <table cellspacing="0">
+        <tr><th>ActionKit Table</th><th>SalesForce Object</th><th></th></tr>
+        <% @etl_object_rules.each do |rule| %>
           <tr>
-            <td><%= etl_object_rule.extract_object %></td>
-            <td><%= etl_object_rule.load_object %></td>
-            <td><%= etl_object_rule.active %></td>
-            <td><%= link_to 'Show', etl_object_rule %></td>
-            <td><%= link_to 'Edit', edit_etl_object_rule_path(etl_object_rule) %></td>
-            <td><%= link_to 'Destroy', etl_object_rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= rule.extract_object %></td>
+            <td><%= rule.load_object %></td>
+            <td><button class="button inline radius">Fields</button></td>
           </tr>
         <% end %>
-      </tbody>
-    </table>
-
-    <br>
+        </table>
+        <div class="row">
+          <div class="small-12 columns text-right">
+            <button class="button radius">Edit Object Rules</button>
+            <%= link_to  "New Object Rule", new_etl_object_rule_url, class: 'button radius' %>
+          </div>
+        </div>
+    </div>
   </div>
 </div>
+
+<style>
+  table
+  {
+    border-color: #ccc;
+  }
+  td
+  {
+    border-bottom: 1px solid;
+    border-color: inherit;
+  }
+  th
+  {
+    border-bottom: 1px solid;
+    border-color: #999;
+  }
+</style>

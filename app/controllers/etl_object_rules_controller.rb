@@ -7,13 +7,7 @@ class EtlObjectRulesController < ApplicationController
   # GET /etl_object_rules
   # GET /etl_object_rules.json
   def index
-    salesforce = Restforce.new
-    actionkit = ActionKitApi.new
     @etl_object_rules = EtlObjectRule.all
-    @object_details = []
-    @etl_object_rules.each do |rule|
-      @object_details.push({:extract_object_name => rule.extract_object.gsub('core_', ''), :extract_object => actionkit.get("/#{rule.extract_object.gsub('core_', '')}/schema"), :load_object_name => rule.load_object, :load_object =>  salesforce.describe(rule.load_object)})
-    end
   end
 
   # GET /etl_object_rules/1
@@ -25,6 +19,21 @@ class EtlObjectRulesController < ApplicationController
   # GET /etl_object_rules/new
   def new
     @etl_object_rule = EtlObjectRule.new
+
+    salesforce = Restforce.new
+    actionkit = ActionKitApi.new
+
+    @etl_object_rules = EtlObjectRule.all
+    actionKitTables = []
+    salesForceObjects = []
+    actionkit.query("SELECT TABLE_NAME FROM information_schema.tables WHERE table_name LIKE 'core%'").each do |table|
+      actionKitTables.push(table[0])
+    end
+    salesforce.describe.each do |object|
+      salesForceObjects.push(object[:name])
+    end
+    gon.push(:actionKitTables => actionKitTables,
+             :salesForceObjects => salesForceObjects)
   end
 
   # GET /etl_object_rules/1/edit
@@ -70,12 +79,23 @@ class EtlObjectRulesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def explore
-    actionkit = ActionKitApi.new
-    metaforce = Metaforce::Metadata::Client.new :username => ENV['SALESFORCE_USERNAME'], :password => ENV['SALESFORCE_PASSWORD'], :security_token => ENV['SALESFORCE_SECURITY_TOKEN']
-    metaforce.describe[:metadata_objects]
-    render plain: metaforce.list(:type => 'CustomObject')
 
+  #VISUALIZER
+
+  def explore
+    salesforce = Restforce.new
+    actionkit = ActionKitApi.new
+    @etl_object_rules = EtlObjectRule.all
+    actionKitTables = []
+    salesForceObjects = []
+    actionkit.query("SELECT TABLE_NAME FROM information_schema.tables WHERE table_name LIKE 'core%'").each do |table|
+      actionKitTables.push(table[0])
+    end
+    salesforce.describe.each do |object|
+      salesForceObjects.push(object[:name])
+    end
+    gon.push(:actionKitTables => actionKitTables,
+             :salesForceObjects => salesForceObjects)
   end
 
   private
