@@ -35,12 +35,13 @@
 		    <ul class="right">
 		    	<li class="<%=  "active" if controller_name == 'home'%>"><%= link_to "Dashboard", root_url %></li>
 
-				
+				<li class="<%#  "active" if controller_name == 'home'%>"><%= link_to "Visualizations", root_url %></li>
+		    	<li class="<%#  "active" if controller_name == 'home'%>"><%= link_to "Stripe Donations", root_url %></li>
 				<li class="has-dropdown">
 					<a href="#">ETL Jobs</a>
 					<ul class="dropdown">
-						<li class="<%=  "active" if controller_name == 'etl_jobs'%>"><%= link_to "Run Jobs", etl_jobs_url %></li>
-						<li class="<%=  "active" if controller_name == 'etl_object_rules'%>"><%= link_to "Object Rules", etl_object_rules_url %></li>
+						<li class="<%=  "active" if controller_name == 'jobs'%>"><%= link_to "Run Jobs", jobs_url %></li>
+						<li class="<%=  "active" if controller_name == 'object_rules'%>"><%= link_to "Object Rules", object_rules_url %></li>
 						<li><%= link_to "Delayed Job", delayed_job_url %></li>
 					</ul>
 				</li>

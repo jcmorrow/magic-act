@@ -1,0 +1,26 @@
+<p>
+  <strong>Extract field:</strong>
+  <%= @field_rule.extract_field %>
+</p>
+
+<p>
+  <strong>Transformation:</strong>
+  <%= @field_rule.transformation %>
+</p>
+
+<p>
+  <strong>Load field:</strong>
+  <%= @field_rule.load_field %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @field_rule.active %>
+</p>
+<p>
+  <strong>Is Primary:</strong>
+  <%= @field_rule.is_primary %>
+</p>
+
+<%= link_to 'Edit', edit_object_rule_field_rule_path(@object_rule, @field_rule) %> |
+<%= link_to 'Back', object_rule_field_rules_path %>

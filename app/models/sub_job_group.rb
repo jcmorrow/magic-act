@@ -1,10 +1,10 @@
 class SubJobGroup < ActiveRecord::Base
-	has_many :etl_sub_jobs
-	belongs_to :etl_job
+	has_many :sub_jobs
+	belongs_to :job
 
 	def self.errorTotalToday
 		errors = 0
-		jobs = EtlSubJob.where("created_at >= ?", Time.zone.now.beginning_of_day)
+		jobs = SubJob.where("created_at >= ?", Time.zone.now.beginning_of_day)
 		jobs.each do |job|
 			unless(job.errors_count.nil?)
 				errors += job.errors_count
@@ -14,7 +14,7 @@ class SubJobGroup < ActiveRecord::Base
 	end
 	def self.errorTotal
 		errors = 0
-		jobs = EtlSubJob.all
+		jobs = SubJob.all
 		jobs.each do |job|
 			unless(job.errors_count.nil?)
 				errors += job.errors_count
@@ -24,7 +24,7 @@ class SubJobGroup < ActiveRecord::Base
 	end
 	def self.etlTotalToday
 		etls = 0
-		jobs = EtlSubJob.where("created_at >= ?", Time.zone.now.beginning_of_day)
+		jobs = SubJob.where("created_at >= ?", Time.zone.now.beginning_of_day)
 		jobs.each do |job|
 			unless(job.load_count.nil?)
 				etls += job.load_count
@@ -34,7 +34,7 @@ class SubJobGroup < ActiveRecord::Base
 	end
 	def self.etlTotal
 		etls = 0
-		jobs = EtlSubJob.all
+		jobs = SubJob.all
 		jobs.each do |job|
 			unless(job.load_count.nil?)
 				etls += job.load_count
@@ -44,7 +44,7 @@ class SubJobGroup < ActiveRecord::Base
 	end
 	def self.newTotalToday
 		new_records = 0
-		jobs = EtlSubJob.where("created_at >= ?", Time.zone.now.beginning_of_day)
+		jobs = SubJob.where("created_at >= ?", Time.zone.now.beginning_of_day)
 		puts jobs.count
 		jobs.each do |job|
 			unless(job.new_load_objects.nil?)
@@ -55,7 +55,7 @@ class SubJobGroup < ActiveRecord::Base
 	end
 	def self.newTotal
 		new_records = 0
-		jobs = EtlSubJob.all
+		jobs = SubJob.all
 		puts jobs.count
 		jobs.each do |job|
 			unless(job.new_load_objects.nil?)

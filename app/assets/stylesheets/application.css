@@ -42,7 +42,8 @@ div.dark
 	color: #7a828d;
 	border-radius: 6px;
 	box-shadow: inset 0px 1px 4px 1px rgba(29, 41, 56, 1);
-	border:1px solid #233143; 
+	border:1px solid #233143;
+	padding: 20px;
 }
 div.dark h1, div.dark h2, div.dark h3, div.dark label
 {
@@ -317,5 +318,43 @@ table input[type="text"]
 span.twitter-typeahead
 {
 	width: 100%;
+}
+tr.nested
+{
+	padding-left: 40px;
+}
+div.bank
+{
+	border-top: 2px solid #ccc;
+}
+div.bank>.columns:first-child
+{
+	border-right: 1px solid #ccc;
+	min-height: 300px;
+}
+div.bank>.columns:last-child
+{
+	border-left: 1px solid #ccc;
+	min-height: 300px;
+}
+span.ak-label
+{
+	padding:5px;
+	background:rgb(153, 32, 32);
+	color: #fff;
+	margin: 3px;
+	display: inline-block;
+	border-radius: 6px;
+	border-bottom: 2px solid #300505;
+}
+span.sf-label
+{
+	padding: 5px;
+	background: rgb(51, 84, 128);
+	color: #fff;
+	margin: 3px;
+	display: inline-block;
+	border-radius: 6px;
+	border-bottom: 2px solid #0B0530;
 }
 

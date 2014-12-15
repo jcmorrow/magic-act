@@ -1,0 +1,36 @@
+<%= form_for([@object_rule, @field_rule]) do |f| %>
+  <% if @field_rule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@field_rule.errors.count, "error") %> prohibited this field_rule from being saved:</h2>
+      <ul>
+      <% @field_rule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :extract_field %>
+    <%= f.text_field :extract_field %>
+  </div>
+  <div class="field">
+    <%= f.label :transformation %>
+    <%= f.text_area :transformation %>
+  </div>
+  <div class="field">
+    <%= f.label :load_field %>
+    <%= f.text_field :load_field %>
+  </div>
+  <div class="field">
+    <label for="field_rule[active]"><%= f.check_box :active %>&nbsp;Active</label>
+  </div>
+  <div class="field">
+    <label for="field_rule[is_primary]"><%= f.check_box :is_primary %>&nbsp;Primary</label>
+  </div>
+  <div class="field">
+    <label for="field_rule[is_foreign_key]"><%= f.check_box :is_foreign_key %>&nbsp;Foreign Key</label>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: "button radius" %>
+  </div>
+<% end %>

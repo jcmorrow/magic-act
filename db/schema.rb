@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211213019) do
+ActiveRecord::Schema.define(version: 20141215185106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,19 +50,35 @@ ActiveRecord::Schema.define(version: 20141211213019) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "etl_field_rules", force: true do |t|
+  create_table "field_rules", force: true do |t|
     t.string   "extract_field"
     t.text     "transformation"
     t.string   "load_field"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "etl_object_rule_id"
+    t.integer  "object_rule_id"
     t.boolean  "is_primary"
     t.boolean  "is_foreign_key"
   end
 
-  create_table "etl_jobs", force: true do |t|
+  create_table "job_object_rels", force: true do |t|
+    t.integer  "job_id"
+    t.integer  "object_rule_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "job_schedules", force: true do |t|
+    t.integer  "interval_length"
+    t.string   "interval_unit"
+    t.time     "run_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  create_table "jobs", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "query"
@@ -76,7 +92,7 @@ ActiveRecord::Schema.define(version: 20141211213019) do
     t.string   "name"
   end
 
-  create_table "etl_object_rules", force: true do |t|
+  create_table "object_rules", force: true do |t|
     t.string   "load_object"
     t.string   "extract_object"
     t.boolean  "active"
@@ -87,9 +103,16 @@ ActiveRecord::Schema.define(version: 20141211213019) do
     t.string   "name"
   end
 
-  create_table "etl_sub_jobs", force: true do |t|
-    t.integer  "etl_job_id"
-    t.integer  "etl_object_rule_id"
+  create_table "sub_job_groups", force: true do |t|
+    t.integer  "job_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sub_jobs", force: true do |t|
+    t.integer  "job_id"
+    t.integer  "object_rule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "extract_file_file_name"
@@ -113,29 +136,6 @@ ActiveRecord::Schema.define(version: 20141211213019) do
     t.float    "duration"
     t.text     "query"
     t.integer  "sub_job_group_id"
-  end
-
-  create_table "job_object_rels", force: true do |t|
-    t.integer  "etl_job_id"
-    t.integer  "etl_object_rule_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "job_schedules", force: true do |t|
-    t.integer  "interval_length"
-    t.string   "interval_unit"
-    t.time     "run_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-  end
-
-  create_table "sub_job_groups", force: true do |t|
-    t.integer  "etl_job_id"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end

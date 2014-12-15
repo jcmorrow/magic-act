@@ -1,0 +1,27 @@
+<%= form_for(@job) do |f| %>
+  <% if @job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% @job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="panel">
+    <div class="field">
+      <h4>Criteria</h4>
+      <%= f.label :query %><br>
+      <%= f.text_area :query %>
+    </div>
+    <div class="field">
+    <h4>Objects to ETL</h4>
+    <%= f.select :object_rule_ids, EtlObjectRule.all.collect {|x| [x.extract_object, x.id]}, {}, :multiple => true %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
