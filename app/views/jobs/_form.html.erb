@@ -18,7 +18,7 @@
     </div>
     <div class="field">
     <h4>Objects to ETL</h4>
-    <%= f.select :object_rule_ids, ObjectRule.all.collect {|x| [x.extract_object, x.id]}, {}, :multiple => true %>
+    <%= f.select :object_rule_ids, ObjectRule.all.collect {|x| [x.extract_object + ' to ' + x.load_object, x.id]}, {}, :multiple => true %>
     </div>
     <div class="actions">
       <%= f.submit %>
