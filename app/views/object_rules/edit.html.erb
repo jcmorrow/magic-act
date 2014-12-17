@@ -1,11 +1,16 @@
 <div class="row">
-	<div class="small-12 columns">
-		<h1>Edit Object Rule</h1>
-		<div class="small-12 columns">
-
-
-			<%= link_to 'Show', @object_rule %> |
-			<%= link_to 'Back', object_rules_path %>
+	<div class="small-12 medium-6 columns">
+		<div class="pan">
+			<h1>Edit Object Rule</h1>
+			<%= render 'form' %>
+		</div>
+	</div>
+	<div class="small-12 medium-6 columns">
+		<div class="dark help">
+			<h4>Help</h4>
+			<p><strong>ActionKit Table</strong>: A table name (example: core_user, core_mailing, etc.)</p>
+			<p><strong>SalesForce Object</strong>: A SalesForce object name (example: Account, Contact, Akid__c, etc.)</p>
+			<p><strong>Custom From Clause</strong>: If you will be pulling fields from multiple ActionKit tables this should include a join statement which joins all the tables (example: FROM core_user JOIN core_action ON core_action.user_id = core_user.id)</p>
 		</div>
 	</div>
 </div>

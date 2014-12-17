@@ -24,7 +24,9 @@ class SubJob < ActiveRecord::Base
 		actionKit = ActionKitApi.new
 		salesforce = SalesforceBulk::Api.new(ENV['SALESFORCE_USERNAME'], ENV['SALESFORCE_PASSWORD'] + ENV['SALESFORCE_SECURITY_TOKEN'])
 		queryResult = runQuery
+		puts "QUERY RAN FINE!!!!!"
 		self.extract_count = queryResult.count
+		puts queryResult.inspect
 		primary_fields = []
 		#TEMP EXTRACT, it'd be nice if we could cut down on the verbosity of these functions
 		temp_extract_csv = CSV.generate(String.new) do |csv|
@@ -71,7 +73,6 @@ class SubJob < ActiveRecord::Base
 				end
 				csv.add_row(values)
 				load_objects.push(load_object)
-				#csv.add_row [ result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10]]
 			end
 		end
 		self.transform_file = StringIO.new(temp_transform_csv)
@@ -79,6 +80,7 @@ class SubJob < ActiveRecord::Base
 		new_objects = 0
 		new_object_errors = 0
 		load_count = 0
+		puts load_objects.size
 		unless(load_objects.empty?)
 			temp_load_csv = CSV.generate(String.new) do |csv|
 				csv << [ 'ID', 'Success?', 'Created?', 'Error' ] 
@@ -104,18 +106,13 @@ class SubJob < ActiveRecord::Base
 		self.save
 		if(self.object_rule.is_primary)
 			#return a new set of criteria for further subjobs
+			puts primary_fields
 			return primary_fields
 		end
 	end
 	def runQuery
 		actionKit = ActionKitApi.new
-		#record_count = actionKit.findUsersCountWhere(job.query, nil).body.gsub('[', '').gsub(']', '').to_i
-		#puts "QUERY TOTAL: #{record_count.to_s}"
-		#job will have to be split up
-		#equired_query_count = (record_count/1000).ceil
-		#puts "QUERIES REQUIRED: #{required_query_count.to_s}"
 		results = []
-		#split the job up into multiple requests.
 		puts composeQuery
 		records_left = true
 		i = 0
@@ -143,6 +140,7 @@ class SubJob < ActiveRecord::Base
 			temp_query << ' ' + where
 		end
 		temp_query << ' LIMIT 1000'
+		puts temp_query
 		return temp_query
 	end
 end

@@ -51,7 +51,7 @@ class
 
     respond_to do |format|
       if @field_rule.save
-        format.html { redirect_to object_rule_field_rules_path(), notice: ' field rule was successfully created.' }
+        format.html { redirect_to object_rule_path(@field_rule.object_rule.id), notice: ' field rule was successfully created.' }
         format.json { render :show, status: :created, location: @field_rule }
       else
         format.html { render :new }

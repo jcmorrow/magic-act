@@ -18,6 +18,10 @@
     <%= f.label :load_object, "SalesForce Object" %>
     <%= f.text_field :load_object, class: "radius" %>
   </div>
+  <div class="field">
+      <%= f.label :custom_from_clause %>
+      <%= f.text_area :custom_from_clause, class: "radius" %>
+    </div>
   <input type="hidden" value="true" />
   <div class="actions">
     <%= f.submit "Save", class: "radius button" %>

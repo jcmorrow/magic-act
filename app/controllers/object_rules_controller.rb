@@ -14,6 +14,19 @@ class ObjectRulesController < ApplicationController
   # GET /object_rules/1.json
   def show
     @object_rule = ObjectRule.includes(:field_rules).find(params[:id])
+    salesforce = Restforce.new
+    actionkit = ActionKitApi.new
+    
+    @actionKitFields = []
+    @salesForceFields = []
+    actionkit.query("SELECT DISTINCT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '#{@object_rule.extract_object}'").each do |field|
+      @actionKitFields.push(field[0])
+    end
+    salesforce.describe(@object_rule.load_object)[:fields].each do |field|
+      @salesForceFields.push(field[:name])
+    end
+    gon.push(:actionKitFields => @actionKitFields,
+             :salesForceFields => @salesForceFields)
   end
 
   # GET /object_rules/new
@@ -106,6 +119,6 @@ class ObjectRulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def object_rule_params
-      params.require(:object_rule).permit(:load_object, :extract_object, :active, :is_primary)
+      params.require(:object_rule).permit(:load_object, :extract_object, :active, :is_primary, :custom_from_clause)
     end
 end

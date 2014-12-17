@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="small-12 columns">
-		<div class="small-12 medium-6 columns panel">
+		<div class="pan">
+			<h3><%= @object_rule.extract_object %> to <%= @object_rule.load_object %></h3>
 			<p>
 			  <strong>Extract Object:</strong>
 			  <%= @object_rule.extract_object %>
@@ -17,17 +18,121 @@
 			  <strong>Is Primary:</strong>
 			  <%= @object_rule.is_primary %>
 			</p>
+      <p>
+        Custom From Clause:
+        <%= @object_rule.custom_from_clause %>
+      </p>
 			<%= link_to 'Edit', edit_object_rule_path(@object_rule) %> |
 			<%= link_to 'Back', object_rules_path %>
 		</div>
-		<div class="small-12 medium-6 columns panel">
-			<h3>Field Rules</h3>
-			<table>
-				<% @object_rule.field_rules.each do |field_rule| %>
-					<tr><td><%=field_rule.extract_field %></td><td><%=field_rule.load_field %></td></tr>
-				<% end %>
-			</table>
-			<%= link_to 'New ETL Field Rule', new_object_rule_field_rule_path(@object_rule.id) %>
-		</div>
 	</div>
 </div>
+<div class="row">
+  <div class="small-12 columns">
+    <div class="pan">
+    	<h3>Field Rules <%= link_to 'New field rule', new_object_rule_field_rule_path(:object_rule_id => @object_rule.id), class: 'right button inline radius' %></h3>
+      <table>
+        <thead>
+          <tr>
+            <th width="200">Extract field</th>
+            <th width="200">Transformation</th>
+            <th width="200">Load field</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @object_rule.field_rules.each do |field_rule| %>
+            <tr>
+              <td width="200"><%= field_rule.extract_field %></td>
+              <td width="200"><%= field_rule.transformation %></td>
+              <td width="200"><%= field_rule.load_field %></td>
+              <td width="50"><%= link_to "Edit", edit_object_rule_field_rule_path(@object_rule, field_rule) %></td>
+              <td width="50"><%= link_to "Delete", object_rule_field_rule_path(@object_rule, field_rule),
+            :confirm => 'Are you sure?', :method => :delete %></td>
+            </tr>
+          <% end %>
+<%
+=begin %>
+
+            <%= form_tag("/object_rules/#{@object_rule.id}/field_rules", method:"POST") do %>
+              <tr>
+                <td width="200"><input id="field_rule_extract_field" class="radius" type="text" name="field_rule[extract_field]" /></td>
+                <td width="200"><input id="field_rule_transformation" class="radius" type="text" name="field_rule[transformation]" /></td>
+                <td width="200"><input id="field_rule_load_field" class="radius" type="text" name="field_rule[load_field]" /></td>
+              </tr>
+              <tr>
+                <td class="text-right" colspan="3"><button type="submit" class="button radius">Save</button></td>
+              </tr>
+            <% end %>
+<%
+=end %>
+        </tbody>
+      </table>
+      <div class="bank row">
+        <div class="small-12 medium-6 columns">
+          <% @actionKitFields.each do |field| %>
+          <span class="ak-label">
+            <%= field %>
+          </span>
+          <% end %>
+        </div>
+        <div class="small-12 medium-6 columns">
+          <% @salesForceFields.each do |field| %>
+          <span class="sf-label">
+            <%= field %>
+          </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+  var substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      var matches, substrRegex;
+   
+      // an array that will be populated with substring matches
+      matches = [];
+   
+      // regex used to determine if a string contains the substring `q`
+      substrRegex = new RegExp(q, 'i');
+   
+      // iterate through the pool of strings and for any string that
+      // contains the substring `q`, add it to the `matches` array
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str)) {
+          // the typeahead jQuery plugin expects suggestions to a
+          // JavaScript object, refer to typeahead docs for more info
+          matches.push({ value: str });
+        }
+      });
+   
+      cb(matches);
+    };
+  };
+
+
+  $('#field_rule_extract_field').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'ActionKitFields',
+    displayKey: 'value',
+    source: substringMatcher(gon.actionKitFields)
+  });
+  $('#field_rule_load_field').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'SalesForceFields',
+    displayKey: 'value',
+    source: substringMatcher(gon.salesForceFields)
+  });
+</script>

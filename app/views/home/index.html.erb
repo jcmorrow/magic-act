@@ -66,9 +66,8 @@
 			<table>
 			  <thead>
 			    <tr>
-			      <th>Extract Object</th>
-			      <th>Load Object</th>
-			      <th>Active</th>
+			      <th>Rule Name</th>
+			      <th class="text-center">Active</th>
 			      <th colspan="3"></th>
 			    </tr>
 			  </thead>
@@ -76,10 +75,8 @@
 			  <tbody>
 			    <% @object_rules.each do |object_rule| %>
 			      <tr>
-			        <td><%= object_rule.extract_object %></td>
-			        <td><%= object_rule.load_object %></td>
-			        <td><%= object_rule.active %></td>
-			        <td><%= link_to 'Show', object_rule %></td>
+			      	<td><%= link_to "#{object_rule.extract_object} to #{object_rule.load_object}", object_rule %></td>
+			        <td class="text-center"><%= raw('<i class="fa fa-check"></i>') if object_rule.active %></td>
 			        <td><%= link_to 'Edit', edit_object_rule_path(object_rule) %></td>
 			      </tr>
 			    <% end %>

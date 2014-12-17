@@ -1,12 +1,13 @@
 <div class="row">
-  <div class="small-12 columns dark">
-    <h1>Jobs <%= link_to 'New Etl job', new_job_path, class: 'right button inline radius' %></h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Date/Time</th>
-          <%
+  <div class="small-12 columns">
+    <div class="pan">
+      <h1>Jobs <%= link_to 'New Etl job', new_job_path, class: 'right button inline radius' %></h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Date/Time</th>
+            <%
 =begin %>
           <th>Extract Results</th>
           <th>Transform Results</th>
@@ -33,12 +34,13 @@
             <td><%= link_to "View Details", job_path(job.id) %></td>            
             <%
 =end %>
-            <td><%= link_to 'Show', job %></td>
-            <td><%= link_to 'Edit', edit_job_path(job) %></td>
-            <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              <td><%= link_to 'Show', job %></td>
+              <td><%= link_to 'Edit', edit_job_path(job) %></td>
+              <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

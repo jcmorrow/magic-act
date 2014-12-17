@@ -10,18 +10,16 @@
       </ul>
     </div>
   <% end %>
-  <div class="panel">
     <div class="field">
-      <h4>Criteria</h4>
+      <h4>Primary Criteria</h4>
       <%= f.label :query %><br>
-      <%= f.text_area :query %>
+      <%= f.text_area :query, class: "radius" %>
     </div>
     <div class="field">
-    <h4>Objects to ETL</h4>
-    <%= f.select :object_rule_ids, ObjectRule.all.collect {|x| [x.extract_object + ' to ' + x.load_object, x.id]}, {}, :multiple => true %>
+    <h4>Object Rules to Follow</h4>
+    <%= f.select :object_rule_ids, ObjectRule.all.collect {|x| [x.extract_object + ' to ' + x.load_object, x.id]}, {}, :multiple => true, class: "radius" %>
     </div>
     <div class="actions">
       <%= f.submit %>
     </div>
-  </div>
 <% end %>

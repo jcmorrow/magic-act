@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<h5>Query</h5>
-					 <p class="query"><%= @job.query %></p><%= link_to "See Query Results", '/etl-job/'+@job.id.to_s+'/count', remote: true, class: "button inline radius right" %>
+					 <p class="query"><%= @job.query %></p><%= link_to "See Query Results", '/job/'+@job.id.to_s+'/count', remote: true, class: "button inline radius right" %>
 				</div>
 			</div>
 			<hr />
@@ -56,7 +56,7 @@
 			</script>
 			<div class="row">
 				<div class="small-12 columns">
-					<%= link_to "Run Job", '/etl-job/'+@job.id.to_s+'/run', method: :post, class: "button radius right inline" %>
+					<%= link_to "Run Job", '/job/'+@job.id.to_s+'/run', method: :post, class: "button radius right inline" %>
 				</div>
 			</div>
 		</div>

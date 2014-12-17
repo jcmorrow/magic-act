@@ -1,7 +1,7 @@
 class DownloadsController < ApplicationController
 	before_action :authenticate_admin!
 	def secureGet
-		job = EtlSubJob.find(params[:sub_job_id])
+		job = SubJob.find(params[:sub_job_id])
 		files = Hash[ 'extract' => job.extract_file,
 						  'transform' => job.transform_file,
 						  'load' => job.load_file]

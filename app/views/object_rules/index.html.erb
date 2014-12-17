@@ -1,27 +1,38 @@
 <div class="row">
   <div class="small-12 columns">
-    <div class="pan">
-      <h3 class="text-center">Object Rules</h3>
-        <% @object_rules.each do |rule| %>
-        <div class="row">
-          <div class="small-12 columns">
-            <h3><%= rule.extract_object %> to <%= rule.load_object %><%= link_to  "Edit Fields", object_rule_field_rules_path(object_rule_id: rule.id), class: 'button inline radius right' %></h3>
-            <table>
-              <% rule.field_rules.each do |field_rule| %>
-                <tr class="nested"><td width="200"><%= field_rule.extract_field %></td><td width="200"><%= field_rule.transformation %></td><td width="200"><%= field_rule.load_field %></td></tr>
-              <% end %>
-            </table>
+    <h2 class="text-center">Object Rules</h2>
+    <% @object_rules.each do |rule| %>
+    <div class="row">
+      <div class="small-12 columns">
+        <div class="pan">
+        <h3><%= rule.extract_object %> to <%= rule.load_object %><%= link_to  "Edit Rule", object_rule_path(id: rule.id), class: 'button inline radius right' %></h3>
+          <hr />
+          <div class="small-6 columns">
+            Active:&nbsp;<%= raw('<i class="fa fa-check"></i>') if rule.active %>
           </div>
-        </div>
-        <% end %>
-        <div class="row">
-          <div class="small-12 columns text-right">
-            <button class="button radius">Edit Object Rules</button>
-            <%= link_to  "New Object Rule", new_object_rule_url, class: 'button radius' %>
+          <div class="small-6 columns">
+            Is Primary:&nbsp;<%= raw('<i class="fa fa-check"></i>') if rule.is_primary %>
           </div>
+          <hr />
+          <h4>Field Rules</h4>
+          <table cellspacing="0">
+            <tr><th>Extract Field</th><th>Transformation</th><th>Load Field</th><th></th><th></th></tr>
+            <% rule.field_rules.each do |field_rule| %>
+            <tr class="nested"><td width="200"><%= field_rule.extract_field %></td><td width="200"><%= field_rule.transformation %></td><td width="200"><%= field_rule.load_field %></td><td width="50"><%= field_rule.active %></td><td width="50"><%= field_rule.is_primary %><td width="50"><%= field_rule.is_foreign_key %></td></td></tr>
+            <% end %>
+          </table>
         </div>
+      </div>
+    </div>
+    <% end %>
+    <div class="row">
+      <div class="small-12 columns text-right">
+        <button class="button radius">Edit Object Rules</button>
+        <%= link_to  "New Object Rule", new_object_rule_url, class: 'button radius' %>
+      </div>
     </div>
   </div>
+</div>
 </div>
 
 <style>

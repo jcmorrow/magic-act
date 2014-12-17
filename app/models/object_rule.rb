@@ -11,7 +11,7 @@ class ObjectRule < ActiveRecord::Base
 			select += field_rule.extract_field + ' as ' + field_rule.load_field
 		end
 		if(!self.custom_from_clause.nil? && self.custom_from_clause != '')
-			select += self.custom_from_clause
+			select += ' '<<self.custom_from_clause
 		else	
 			select += ' FROM ' + extract_object
 		end
