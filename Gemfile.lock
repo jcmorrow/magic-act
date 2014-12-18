@@ -144,6 +144,8 @@ GEM
     nested_form (0.3.2)
     nokogiri (1.5.11)
     nori (1.1.5)
+    nvd3-rails (0.0.1.1)
+      railties (>= 3.2.0, < 5.0)
     orm_adapter (0.5.0)
     paperclip (4.2.0)
       activemodel (>= 3.0.0)
@@ -275,6 +277,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   metaforce
+  nvd3-rails
   paperclip (~> 4.2)
   paypal-sdk-rest
   pg

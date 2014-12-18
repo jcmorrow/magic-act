@@ -25,3 +25,4 @@ gem 'highline' #required by metaforce
 gem 'paypal-sdk-rest'
 gem 'twitter-typeahead-rails'
 gem 'gon'
+gem 'nvd3-rails'
