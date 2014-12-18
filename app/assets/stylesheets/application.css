@@ -70,7 +70,7 @@ p.query, span.query
 }
 .button.inline
 {
-	margin: 0px 5px;
+	margin: 5px;
 	padding:5px;
 }
 h1>.button.inline.right

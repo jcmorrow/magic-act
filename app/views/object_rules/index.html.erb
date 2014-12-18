@@ -16,7 +16,7 @@
           <hr />
           <h4>Field Rules</h4>
           <table cellspacing="0">
-            <tr><th>Extract Field</th><th>Transformation</th><th>Load Field</th><th></th><th></th></tr>
+            <tr><th>Extract Field</th><th>Transformation</th><th>Load Field</th><th>Active?</th><th></th></tr>
             <% rule.field_rules.each do |field_rule| %>
             <tr class="nested"><td width="200"><%= field_rule.extract_field %></td><td width="200"><%= field_rule.transformation %></td><td width="200"><%= field_rule.load_field %></td><td width="50"><%= field_rule.active %></td><td width="50"><%= field_rule.is_primary %><td width="50"><%= field_rule.is_foreign_key %></td></td></tr>
             <% end %>

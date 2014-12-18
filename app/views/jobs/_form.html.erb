@@ -12,14 +12,14 @@
   <% end %>
     <div class="field">
       <h4>Primary Criteria</h4>
-      <%= f.label :query %><br>
+      <%= f.label :query %>
       <%= f.text_area :query, class: "radius" %>
     </div>
     <div class="field">
     <h4>Object Rules to Follow</h4>
     <%= f.select :object_rule_ids, ObjectRule.all.collect {|x| [x.extract_object + ' to ' + x.load_object, x.id]}, {}, :multiple => true, class: "radius" %>
     </div>
-    <div class="actions">
-      <%= f.submit %>
+    <div class="text-right">
+      <%= f.submit "Save", class: "button radius"%>
     </div>
 <% end %>
