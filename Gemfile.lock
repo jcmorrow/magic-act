@@ -68,6 +68,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    d3-rails (3.5.2)
+      railties (>= 3.1)
     delayed_job (4.0.4)
       activesupport (>= 3.0, < 4.2)
     delayed_job_active_record (4.0.2)
@@ -144,8 +146,6 @@ GEM
     nested_form (0.3.2)
     nokogiri (1.5.11)
     nori (1.1.5)
-    nvd3-rails (0.0.1.1)
-      railties (>= 3.2.0, < 5.0)
     orm_adapter (0.5.0)
     paperclip (4.2.0)
       activemodel (>= 3.0.0)
@@ -266,6 +266,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  d3-rails
   delayed_job_active_record
   delayed_job_recurring
   delayed_job_web
@@ -277,7 +278,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   metaforce
-  nvd3-rails
   paperclip (~> 4.2)
   paypal-sdk-rest
   pg

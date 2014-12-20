@@ -1,5 +1,47 @@
-<div class="row">
-	<div class="small-12 columns" style="min-height:500px;background:#fff">
-		
+	<div class="row">
+		<div class="small-12 columns">
+			<div id="chart" class="pan" style="min-height:500px;background:#fff;padding-top:10px;padding-bottom:10px;">
+
+			</div>
+		</div>
 	</div>
-</div>
+	<div class="row">
+		<div class="small-12 medium-6 columns">
+			<div class="pan">
+			<h4>Query</h4>
+			<%= form_tag('/query/', remote: true) do %>
+			<textarea class="radius" type="text" name="query"></textarea>
+			  <button class="radius button" type="submit">Query</button>
+			<% end %>
+		</div>
+	</div>
+	<style>
+	#chart div
+	{
+		background: rgb(189, 209, 226);
+	}
+	</style>
+<script>
+  	$(document).ready(function(){
+	    $('form').on('ajax:success',function(xhr, data, status){
+
+	    	var x = d3.scale.linear()
+			    .domain([0, d3.max(JSON.parse(data), function(d){ return d[1] })])
+			    .range([0, 970]);
+	    	d3.select("#chart")
+			  .selectAll("div")
+				.data(JSON.parse(data))
+			  .enter().append("div")
+			    .style("width", function(d) {	
+			    								return x(d[1]) + "px"; 
+			    							})
+			    .text(function(d) { return d[0]; });
+	  	});
+	});
+	var margin = {top: 10, right: 10, bottom: 100, left: 40},
+	    margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+	    width = 960 - margin.left - margin.right,
+	    height = 500 - margin.top - margin.bottom,
+	    height2 = 500 - margin2.top - margin2.bottom;
+
+</script>

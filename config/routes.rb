@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/job/:id/run' => 'jobs#run'
   get '/download/:sub_job_id/:file_type', to: 'downloads#secureGet', as: 'secure_get'
   get '/visualizations/', to: 'visualizations#index', as: 'visualizations'
+  post '/query/', to: 'visualizations#query', as: 'query'
 
   root 'home#index'
   resources :jobs
