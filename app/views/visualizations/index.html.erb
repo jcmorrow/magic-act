@@ -19,6 +19,8 @@
 	#chart div
 	{
 		background: rgb(189, 209, 226);
+		overflow:scroll;
+		max-height: 24px;
 	}
 	</style>
 <script>
@@ -26,7 +28,7 @@
 	    $('form').on('ajax:success',function(xhr, data, status){
 
 	    	var x = d3.scale.linear()
-			    .domain([0, d3.max(JSON.parse(data), function(d){ return d[1] })])
+			    .domain([0, d3.max(JSON.parse(data), function(d){ console.log(d); return d[1] })])
 			    .range([0, 970]);
 	    	d3.select("#chart")
 			  .selectAll("div")
