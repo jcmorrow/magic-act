@@ -10,9 +10,16 @@
 			<div class="pan">
 			<h4>Query</h4>
 			<%= form_tag('/query/', remote: true) do %>
-			<textarea class="radius" type="text" name="query"></textarea>
+			<div id="display-fields">
+				<input type="text" class="radius" name="display-1" value="">
+				<input type="text" class="radius" name="display-2" value="">
+				<input type="text" class="radius" name="display-3" value="">
+			</div>
+			<label>Custom SQL</label>
+			<textarea class="radius" type="text" name="query" style="min-height:200px"></textarea>
 			  <button class="radius button" type="submit">Query</button>
 			<% end %>
+			</div>
 		</div>
 	</div>
 	<style>
@@ -22,28 +29,79 @@
 		overflow:scroll;
 		max-height: 24px;
 	}
+	.line {
+	  fill: rgb(219, 228, 255);
+	  stroke: rgb(70, 76, 180);
+	  stroke-width: 1.5px;
+	}
 	</style>
 <script>
   	$(document).ready(function(){
+  		svg = d3.select('#chart')
 	    $('form').on('ajax:success',function(xhr, data, status){
-
-	    	var x = d3.scale.linear()
-			    .domain([0, d3.max(JSON.parse(data), function(d){ console.log(d); return d[1] })])
-			    .range([0, 970]);
-	    	d3.select("#chart")
-			  .selectAll("div")
-				.data(JSON.parse(data))
-			  .enter().append("div")
-			    .style("width", function(d) {	
-			    								return x(d[1]) + "px"; 
-			    							})
-			    .text(function(d) { return d[0]; });
+	    	svg.selectAll("div").remove();
+	    	console.log(d3.max(JSON.parse(data), function(d){ return d[1] }))
+	    	//barGraph(data);
+	    	lineGraph(data);
 	  	});
 	});
-	var margin = {top: 10, right: 10, bottom: 100, left: 40},
-	    margin2 = {top: 430, right: 10, bottom: 20, left: 40},
-	    width = 960 - margin.left - margin.right,
-	    height = 500 - margin.top - margin.bottom,
-	    height2 = 500 - margin2.top - margin2.bottom;
+	function barGraph(data)
+	{
+		var x = d3.scale.linear()
+		    	  .domain([0, d3.max(JSON.parse(data), function(d){ return d[1] })])
+		    	  .range([0, 930]);
+		svg.selectAll("div")
+			.data(JSON.parse(data))
+		  	.enter().append("div")
+		   	.style("width", function(d) 
+		   	{	
+				return x(d[1]) + "px"; 
+			})
+		   	.text(function(d) { return d[0]; });
+	}
+	function lineGraph(data)
+	{
+		realsvg = svg.append("svg")
+					 .attr("width", 930)
+					 .attr("height", 500)
+		var parseDate = d3.time.format("%Y-%m-%d").parse;
+		var y = d3.scale.linear()
+		    	  .domain([0, d3.max(JSON.parse(data), function(d){ return d[1] })])
+		    	  .range([500, 0]);
+
+	  	var x = d3.time.scale()
+					   .domain(d3.extent(JSON.parse(data), function(d){ return parseDate(d[0]) }))
+					   .range([0, 930]);
+
+		var line = d3.svg.line()
+						 .x(function(d) { console.log(x(parseDate(d[0]))); return x(parseDate(d[0])); })
+						 .y(function(d) { console.log(y(d[1])); return y(d[1]); })
+						 .interpolate('basis')
+		
+		realsvg.append("path")
+			.datum(JSON.parse(data))
+			.attr("class", "line")
+			.attr("d", line);
+	}
+	function composeQuery()
+	{
+		query = "SELECT ";
+		var values = [];
+		$.each($('#display-fields input'), function(index, value){
+			values.push($(value).val());
+		});
+		query = query + values.join(', ');
+		console.log(query);
+	}
+
+	/*
+	select date( core_action.created_at ) as created_at_d,
+    count(distinct core_action.id) as action_count,
+    sum(core_action.created_user) as created_users
+	from core_action
+	where not ( exists ( select * from core_page where core_action.page_id = core_page.id and core_page.type in ( 'Import' ) ) )
+	group by created_at_d
+	order by created_at_d ASC
+	*/
 
 </script>
