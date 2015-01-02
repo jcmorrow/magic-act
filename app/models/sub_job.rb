@@ -24,7 +24,6 @@ class SubJob < ActiveRecord::Base
 		actionKit = ActionKitApi.new
 		salesforce = SalesforceBulk::Api.new(ENV['SALESFORCE_USERNAME'], ENV['SALESFORCE_PASSWORD'] + ENV['SALESFORCE_SECURITY_TOKEN'])
 		queryResult = runQuery
-		puts "QUERY RAN FINE!!!!!"
 		self.extract_count = queryResult.count
 		puts queryResult.inspect
 		primary_fields = []

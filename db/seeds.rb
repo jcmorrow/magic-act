@@ -170,7 +170,7 @@ FieldRule.create(
 				  :active => 'true')
 FieldRule.create(
 				  :extract_field => "core_transaction.status", 
-				  :transformation => 'Closed Won" if value == "completed"', 
+				  :transformation => 'case value when "completed" "Closed Won" else "Closed Lost" end', 
 				  :load_field => "StageName", 
 				  :object_rule_id => "2", 
 				  :is_primary => "false", 
