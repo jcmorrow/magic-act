@@ -1,7 +1,7 @@
 module Recurring
 	class JobScheduler
 	  include Delayed::RecurringJob
-	  run_every 1.day
+	  run_every 30.minutes
 	  run_at (Time.now + 1.minute).strftime('%l:%M%P')
 	  timezone 'US/Pacific'
 	  queue 'ETL-jobs'
