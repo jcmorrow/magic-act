@@ -3,7 +3,7 @@ namespace :schedule do
   task jobs: :environment do
   	require 'job_scheduler'
   	Delayed::Job.where('(handler LIKE ?)', '--- !ruby/object:Recurring::%').destroy_all
-  	Recurring::JobScheduler.schedule!
+  	JobScheduler.schedule!
   end
 
 end
