@@ -6,7 +6,7 @@ class JobScheduler
   #timezone 'US/Pacific' #this line is causing some issues on the server.
   queue 'ETL-jobs'
   def perform
-    Jobs.all.each do |job|
+    Jobs.where(is_scheduled: true).each do |job|
     	job.run
     end
   end

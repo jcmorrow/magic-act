@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215185106) do
+ActiveRecord::Schema.define(version: 20150122214527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20141215185106) do
     t.integer  "errors_count"
     t.integer  "job_schedule_id"
     t.string   "name"
+    t.boolean  "is_scheduled"
   end
 
   create_table "object_rules", force: true do |t|
