@@ -25,7 +25,7 @@ class SubJob < ActiveRecord::Base
 		salesforce = SalesforceBulk::Api.new(ENV['SALESFORCE_USERNAME'], ENV['SALESFORCE_PASSWORD'] + ENV['SALESFORCE_SECURITY_TOKEN'])
 		queryResult = runQuery
 		self.extract_count = queryResult.count
-		puts queryResult.inspect
+		#puts queryResult.inspect
 		primary_fields = []
 		#TEMP EXTRACT, it'd be nice if we could cut down on the verbosity of these functions
 		temp_extract_csv = CSV.generate(String.new) do |csv|
@@ -79,7 +79,7 @@ class SubJob < ActiveRecord::Base
 		new_objects = 0
 		new_object_errors = 0
 		load_count = 0
-		puts load_objects.size
+		#puts load_objects.size
 		unless(load_objects.empty?)
 			temp_load_csv = CSV.generate(String.new) do |csv|
 				csv << [ 'ID', 'Success?', 'Created?', 'Error' ] 
@@ -105,18 +105,18 @@ class SubJob < ActiveRecord::Base
 		self.save
 		if(self.object_rule.is_primary)
 			#return a new set of criteria for further subjobs
-			puts primary_fields
+			#puts primary_fields
 			return primary_fields
 		end
 	end
 	def runQuery
 		actionKit = ActionKitApi.new
 		results = []
-		puts composeQuery
+		#puts composeQuery
 		records_left = true
 		i = 0
 		while(records_left)
-			puts "Querying for the #{i + 1} time."
+			#puts "Querying for the #{i + 1} time."
 			query_result = actionKit.query(composeQuery << " OFFSET #{i*1000}")
 			results.concat query_result
 			i += 1
@@ -139,7 +139,7 @@ class SubJob < ActiveRecord::Base
 			temp_query << ' ' + where
 		end
 		temp_query << ' LIMIT 1000'
-		puts temp_query
+		#puts temp_query
 		return temp_query
 	end
 end

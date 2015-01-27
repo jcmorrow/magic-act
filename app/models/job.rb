@@ -8,6 +8,7 @@ class Job < ActiveRecord::Base
 	def run
 		require 'actionkitapi'
 		startTime = Time.now
+		logger.info "Starting job #{self.id}"
 		p_object_rule = object_rules.where(is_primary: true)[0]
 		job_group = SubJobGroup.create(job_id: self.id, status: 'inprogress')
 		p_sub_job = SubJob.new(sub_job_group_id: job_group.id, object_rule_id: p_object_rule.id, query: self.query)
@@ -16,7 +17,6 @@ class Job < ActiveRecord::Base
 		#run all non-primaries using the results from the primary. Makes sense to me, we'll see if it holds up
 		unless(new_where.empty?)
 			object_rules.where(is_primary: false).each do |object_rule|
-				#OK, here I'm super lost. DAMMIT past Josh.
 				SubJob.new(sub_job_group_id: job_group.id, object_rule_id: object_rule.id, query: "WHERE #{object_rule.field_rules.where(is_foreign_key: true)[0].extract_field} IN (#{new_where.join(', ')})").run
 			end
 		end
