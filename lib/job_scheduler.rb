@@ -7,6 +7,7 @@ class JobScheduler
   queue 'ETL-jobs'
   def perform
     Jobs.where(is_scheduled: true).each do |job|
+      logger.info "#{job.id} is scheduled" 
     	job.run
     end
   end
