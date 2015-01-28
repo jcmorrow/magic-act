@@ -112,7 +112,7 @@ class SubJob < ActiveRecord::Base
 	def runQuery
 		actionKit = ActionKitApi.new
 		results = []
-		#puts composeQuery
+		puts composeQuery
 		records_left = true
 		i = 0
 		while(records_left)
