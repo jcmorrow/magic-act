@@ -2,7 +2,7 @@
 
 An ActionKit extension for data analysis, visualization, ETL, and advanced payment processing!
 
-*Note: Visualization and QuickDonate tools are still sitting in another Ruby repo that isn't ready to be released, they will be ported into this repo by January 1st 2015.*
+*Note: Visualization and QuickDonate tools are still sitting in another Ruby repo that isn't ready to be released, they will be ported into this repo when I get a chance.*
 
 ##Setup
 
