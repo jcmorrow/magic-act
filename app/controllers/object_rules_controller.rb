@@ -2,7 +2,7 @@ class ObjectRulesController < ApplicationController
   before_action :set_object_rule, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
 
-  require 'actionkitapi'
+  require 'action_kit_api'
 
   # GET /object_rules
   # GET /object_rules.json

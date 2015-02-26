@@ -15,6 +15,7 @@ gem 'devise'
 gem 'rails_12factor', group: :production
 #gem 'whenever'
 gem 'restforce'
+gem 'rack-cors', :require => 'rack/cors'
 gem 'salesforce_bulk'
 gem "paperclip", "~> 4.2"
 gem "delayed_job_recurring"

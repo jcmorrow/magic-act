@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/visualizations/', to: 'visualizations#index', as: 'visualizations'
   post '/query/', to: 'visualizations#query', as: 'query'
 
+  get '/feeds/actions/:id', to: 'feeds#actions', as: 'action_feed'
+
   root 'home#index'
   resources :jobs
   resources :object_rules do
