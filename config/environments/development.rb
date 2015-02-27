@@ -44,4 +44,11 @@ Rails.application.configure do
     },
     :s3_permissions => :private
   }
+  config.middleware.use Rack::Cors do
+    allow do
+      origins 'action.storyofstuff.org', 'storyofstuff.actionkit.com', 'storyofstuff.org', 'localhost', '192.168.1.77'
+      resource '/feeds/*', :headers => :any, :methods => [:get, :options]
+    end
+  end
+  config.action_controller.perform_caching = false
 end

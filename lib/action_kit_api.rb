@@ -31,6 +31,7 @@ class ActionKitApi
 	end
 	def query(sql)
 	  	post_options = @options
+	  	post_options[:cache_duration] = 5
 	  	post_options[:body] = {:query => sql}.to_json
 	  	return post('/report/run/sql/', post_options)
 	end
