@@ -6,7 +6,7 @@ class Job < ActiveRecord::Base
 	has_many :object_rules, through: :job_object_rels
 	
 	def run
-		require 'actionkitapi'
+		require 'action_kit_api'
 		startTime = Time.now
 		logger.info "Starting job #{self.id}"
 		p_object_rule = object_rules.where(is_primary: true)[0]
