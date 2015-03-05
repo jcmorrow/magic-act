@@ -67,7 +67,7 @@ class JobsController < ApplicationController
   end
 
   def queryCount
-    require 'actionkitapi'
+    require 'action_kit_api'
     @job = Job.find(params[:id])
     actionKit = ActionKitApi.new
     count = actionKit.findUsersCountWhere(@job.query, nil).body.gsub('[', '').gsub(']', '')
