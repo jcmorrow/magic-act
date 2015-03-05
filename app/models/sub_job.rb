@@ -20,7 +20,7 @@ class SubJob < ActiveRecord::Base
 	delegate :job, to: :sub_job_group
 
 	def run
-		require 'actionkitapi'
+		require 'action_kit_api'
 		actionKit = ActionKitApi.new
 		salesforce = SalesforceBulk::Api.new(ENV['SALESFORCE_USERNAME'], ENV['SALESFORCE_PASSWORD'] + ENV['SALESFORCE_SECURITY_TOKEN'])
 		queryResult = runQuery
